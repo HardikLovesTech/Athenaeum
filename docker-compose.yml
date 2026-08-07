@@ -1,0 +1,77 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: athenaeum_postgres
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_USER: athenaeum
+      POSTGRES_PASSWORD: athenaeum123
+      POSTGRES_DB: athenaeum
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+
+    networks:
+      - athenaeum-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: athenaeum_redis
+    restart: unless-stopped
+
+    ports:
+      - "6380:6379"
+
+    command: redis-server --appendonly yes
+
+    volumes:
+      - ./data/redis:/data
+
+    networks:
+      - athenaeum-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: athenaeum_pgadmin
+    restart: unless-stopped
+
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+
+    ports:
+      - "5050:80"
+
+    volumes:
+      - ./data/pgadmin:/var/lib/pgadmin
+
+    depends_on:
+      - postgres
+
+    networks:
+      - athenaeum-network
+
+  redisinsight:
+    image: redis/redisinsight
+    container_name: athenaeum_redisinsight
+    restart: unless-stopped
+
+    ports:
+      - "5540:5540"
+
+    volumes:
+      - ./data/redisinsight:/data
+
+    depends_on:
+      - redis
+
+    networks:
+      - athenaeum-network
+
+networks:
+  athenaeum-network:
+    driver: bridge

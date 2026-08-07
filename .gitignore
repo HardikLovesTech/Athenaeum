@@ -69,6 +69,7 @@ web_modules/
 .env
 .env.*
 !.env.example
+athenaeum-env
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -141,3 +142,31 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Ignore PostgreSQL local data directories (e.g., from Docker or local setup)
+postgres-data/
+pgdata/
+data/
+
+# Ignore database backup files and SQL dumps
+*.sql
+*.sql.gz
+*.dump
+*.tar
+
+# Ignore environment files containing database credentials
+.env
+.env.local
+.env.*.local
+
+# Ignore pgAdmin local storage and configurations
+.pgadmin/
+pgadmin*.log
+
+
+# Ignore Python cache directories
+__pycache__/
+
+# Ignore compiled Python files
+*.py[cod]
+*$py.class
