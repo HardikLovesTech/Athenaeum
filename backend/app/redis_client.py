@@ -1,8 +1,9 @@
 import redis
+from app.core.config import RedisHost, RedisPort
 
 RedisClient = redis.Redis(
-    host="localhost",
-    port=6379,
+    host=RedisHost,
+    port=int(RedisPort),
     decode_responses=True
 )
 
