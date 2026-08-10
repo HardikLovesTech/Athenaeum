@@ -12,3 +12,7 @@ class LoginRequest(BaseModel):
 class TokenResponse(BaseModel):
     AccessToken: str
     TokenType: str
+    RefreshToken: str
+
+class RefreshTokenRequest(BaseModel):
+    RefreshToken: str
