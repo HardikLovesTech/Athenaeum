@@ -40,14 +40,14 @@ class User(Base):
 
     CreatedAt: Mapped[datetime.datetime] = mapped_column(
         DateTime,
-        default=datetime.datetime.now(datetime.UTC),
+        default=lambda: datetime.datetime.now(datetime.timezone.utc),
         nullable=False,
     )
 
 
     UpdatedAt: Mapped[datetime.datetime] = mapped_column(
             DateTime,
-            default=datetime.datetime.now(datetime.UTC),
-            onupdate=datetime.datetime.now(datetime.UTC),
+            default=lambda: datetime.datetime.now(datetime.timezone.utc),
+            onupdate=lambda: datetime.datetime.now(datetime.timezone.utc),
             nullable=False,
     )

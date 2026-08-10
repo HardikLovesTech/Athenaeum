@@ -25,3 +25,4 @@ RedisPort = GetRequiredEnvironmentVariable("REDIS_PORT")
 
 AccessTokenExpireMinutes = int(GetRequiredEnvironmentVariable("ACCESS_TOKEN_EXPIRE_MINUTES"))
 SecretKey = GetRequiredEnvironmentVariable("SECRET_KEY")
+RefreshTokenExpireDays = int(GetRequiredEnvironmentVariable("REFRESH_TOKEN_EXPIRE_DAYS"))
