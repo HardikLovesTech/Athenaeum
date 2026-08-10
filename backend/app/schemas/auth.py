@@ -16,3 +16,14 @@ class TokenResponse(BaseModel):
 
 class RefreshTokenRequest(BaseModel):
     RefreshToken: str
+
+class ForgotPasswordRequest(BaseModel):
+    Email : EmailStr
+
+class ForgotPasswordResponse(BaseModel):
+    Message: str
+    ResetToken: str | None = None
+
+class ResetPasswordRequest(BaseModel):
+    ResetToken:str
+    NewPassword: str

@@ -8,6 +8,12 @@ from sqlalchemy.orm import Session
 from app.core.config import RefreshTokenExpireDays
 from app.db.models.refresh_token import RefreshToken
 
+from app.services.redis_services import (
+    DeleteValue,
+    GetValue,
+    SetValue
+)
+
 from app.core.security import (
     CreateAccessToken,
     HashPassword,
@@ -140,3 +146,49 @@ def RevokeRefreshToken(
     TokenRecord.RevokedAt = datetime.now(timezone.utc)
 
     Database.commit()
+
+
+def CreatePasswordResetToken(
+        UserRecord: User,
+) -> str:
+
+    ResetToken = secrets.token_urlsafe(32)
+
+    RedisKey = f"password-reset:{ResetToken}"
+
+    SetValue(
+        Key=RedisKey,
+        Value=str(UserRecord.Id),
+        ExpirationSeconds=900,
+    )
+
+    return ResetToken
+
+
+def GetUserIdFromPasswordResetToken(
+        ResetToken: str,
+) -> int | None:
+
+    RedisKey = f"password-reset:{ResetToken}"
+
+    UserId = GetValue(
+        Key=RedisKey
+    )
+
+    if UserId is None:
+        return None
+
+    try:
+        return int(UserId)
+    except ValueError:
+        return None
+
+def DeletePasswordResetToken(
+        ResetToken: str,
+) -> None:
+    RedisKey = f"password-reset:{ResetToken}"
+
+    DeleteValue(
+        Key=RedisKey
+    )
+
