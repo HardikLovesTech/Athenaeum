@@ -51,3 +51,10 @@ class User(Base):
             onupdate=lambda: datetime.datetime.now(datetime.timezone.utc),
             nullable=False,
     )
+
+    Role: Mapped[str] = mapped_column(
+        String(20),
+        default="user",
+        nullable=False,
+        index=True,
+    )

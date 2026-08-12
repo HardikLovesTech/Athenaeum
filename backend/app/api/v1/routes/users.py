@@ -1,10 +1,14 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends , HTTPException , status
 from sqlalchemy.orm import Session
 
 from app.db.session import GetDatabase
 from app.db.models.user import User
 from app.db.session import GetDatabase
-from app.schemas.user import UserResponse
+from app.schemas.user import (
+    
+    UserResponse,
+    UpdateProfileRequest,
+    )
 from app.core.security import GetCurrentUser
 
 Router = APIRouter(
@@ -29,4 +33,32 @@ def GetMe(
     CurrentUser: User = Depends(GetCurrentUser)
 
 ):
+    return CurrentUser
+
+
+@Router.patch(
+    "/me",
+    response_model=UserResponse
+)
+def UpdateProfile(
+        Request: UpdateProfileRequest,
+        CurrentUser: User = Depends(GetCurrentUser),
+        Database : Session = Depends(GetDatabase),
+):
+    ExisitingUser = Database.query(User).filter(
+        User.Username == Request.Username,
+        User.Id != CurrentUser.Id
+    ).first()
+
+    if ExisitingUser is not None:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Username already registered"
+        )
+
+    CurrentUser.Username = Request.Username
+
+    Database.commit()
+    Database.refresh(CurrentUser)
+
     return CurrentUser
