@@ -6,6 +6,7 @@ from app.redis_client import RedisClient
 from app.api.v1.routes.auth import Router as AuthRouter
 from app.api.v1.routes.users import Router as UsersRouter
 from app.api.v1.routes.redis import Router as RedisRouter
+from app.api.v1.routes.knowledge import Router as KnowledgeRouter
 
 app = FastAPI(
     title="Athenaeum API",
@@ -39,5 +40,10 @@ app.include_router(
 
 app.include_router(
     UsersRouter,
+    prefix="/api/v1"
+)
+
+app.include_router(
+    KnowledgeRouter,
     prefix="/api/v1"
 )

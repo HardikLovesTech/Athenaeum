@@ -5,6 +5,7 @@ from sqlalchemy import pool
 
 from app.db.database import Base
 from app.db.models import User
+from app.db.models.knowledge_item import KnowledgeItem
 from app.core.config import (
     PostgresDatabase,
     PostgresHost,
@@ -12,6 +13,8 @@ from app.core.config import (
     PostgresPort,
     PostgresUser
 )
+
+
 
 DATABASE_URL = (
     f"postgresql://{PostgresUser}:{PostgresPassword}"
