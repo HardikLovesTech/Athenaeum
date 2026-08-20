@@ -15,6 +15,14 @@ def ChangeUserPassword(
     ):
         return False
 
+    if VerifyPassword(
+        NewPassword,
+        UserRecord.PasswordHash,
+    ):
+        raise ValueError(
+            "New password must be different from current password"
+        )
+
     UserRecord.PasswordHash = HashPassword(NewPassword)
 
     Database.commit()

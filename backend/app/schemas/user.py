@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr , Field
 
 
 class UserResponse(BaseModel):
@@ -17,3 +17,12 @@ class UserResponse(BaseModel):
 
 class UpdateProfileRequest(BaseModel):
     Username: str
+
+
+class ChangePasswordRequest(BaseModel):
+    CurrentPassword: str
+    NewPassword: str = Field(
+        min_length=8,
+        max_length=128,
+    )
+
