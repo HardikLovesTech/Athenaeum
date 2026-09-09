@@ -24,3 +24,13 @@ def CreateKnowledgeItem(
     Database.refresh(NewKnowledgeItem)
 
     return NewKnowledgeItem
+
+def GetKnowledgeItems(
+    Database: Session,
+    UserId: int,
+) -> list[KnowledgeItem]:
+    Statement = select(KnowledgeItem).where(
+        KnowledgeItem.UserId == UserId
+    )
+
+    return list(Database.scalars(Statement).all())

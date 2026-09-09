@@ -9,7 +9,10 @@ from app.schemas.knowledge_item import (
     KnowledgeItemResponse
 )
 
-from app.services.knowledge_services import CreateKnowledgeItem
+from app.services.knowledge_services import (
+    CreateKnowledgeItem,
+    GetKnowledgeItems,
+)
 
 Router = APIRouter(
     prefix="/knowledge",
@@ -34,4 +37,18 @@ def CreateKnowledge(
         Content=Request.Content,
         Type=Request.Type,
         SourceUrl=Request.SourceUrl,
+    )
+
+
+@Router.get(
+    "",
+    response_model=list[KnowledgeItemResponse],
+)
+def GetKnowledge(
+    CurrentUser: User = Depends(GetCurrentUser),
+    Database: Session = Depends(GetDatabase),
+):
+    return GetKnowledgeItems(
+        Database=Database,
+        UserId=CurrentUser.Id,
     )
