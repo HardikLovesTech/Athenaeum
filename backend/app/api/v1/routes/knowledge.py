@@ -15,6 +15,7 @@ from app.services.knowledge_services import (
     GetKnowledgeItems,
     GetKnowledgeItem,
     UpdateKnowledgeItem,
+    DeleteKnowledgeItem
 )
 
 Router = APIRouter(
@@ -109,3 +110,24 @@ def UpdateKnowledge(
         )
 
     return KnowledgeItem
+
+@Router.delete(
+    "/{KnowledgeItemId}",
+    status_code=status.HTTP_204_NO_CONTENT,
+)
+def DeleteKnowledge(
+    KnowledgeItemId: int,
+    CurrentUser: User = Depends(GetCurrentUser),
+    Database: Session = Depends(GetDatabase),
+):
+    Deleted = DeleteKnowledgeItem(
+        Database=Database,
+        UserId=CurrentUser.Id,
+        KnowledgeItemId=KnowledgeItemId,
+    )
+
+    if not Deleted:
+        raise HTTPException(
+            status_code=404,
+            detail="Knowledge item not found",
+        )

@@ -84,3 +84,22 @@ def UpdateKnowledgeItem(
     Database.refresh(KnowledgeItem)
 
     return KnowledgeItem
+
+def DeleteKnowledgeItem(
+    Database: Session,
+    UserId: int,
+    KnowledgeItemId: int,
+) -> bool:
+    KnowledgeItem = GetKnowledgeItem(
+        Database=Database,
+        UserId=UserId,
+        KnowledgeItemId=KnowledgeItemId,
+    )
+
+    if KnowledgeItem is None:
+        return False
+
+    Database.delete(KnowledgeItem)
+    Database.commit()
+
+    return True
