@@ -6,13 +6,15 @@ from app.db.models.user import User
 from app.db.session import GetDatabase
 from app.schemas.knowledge_item import (
     KnowledgeItemCreate,
-    KnowledgeItemResponse
+    KnowledgeItemResponse,
+    KnowledgeItemUpdate,
 )
 
 from app.services.knowledge_services import (
     CreateKnowledgeItem,
     GetKnowledgeItems,
-    GetKnowledgeItem
+    GetKnowledgeItem,
+    UpdateKnowledgeItem,
 )
 
 Router = APIRouter(
@@ -76,6 +78,34 @@ def GetKnowledgebyId(
         raise HTTPException(
             status_code=404,
             detail="Knowledge item not found"
+        )
+
+    return KnowledgeItem
+
+@Router.patch(
+    "/{KnowledgeItemId}",
+    response_model=KnowledgeItemResponse,
+)
+def UpdateKnowledge(
+    KnowledgeItemId: int,
+    Request: KnowledgeItemUpdate,
+    CurrentUser: User = Depends(GetCurrentUser),
+    Database: Session = Depends(GetDatabase),
+):
+    KnowledgeItem = UpdateKnowledgeItem(
+        Database=Database,
+        UserId=CurrentUser.Id,
+        KnowledgeItemId=KnowledgeItemId,
+        Title=Request.Title,
+        Content=Request.Content,
+        Type=Request.Type,
+        SourceUrl=Request.SourceUrl,
+    )
+
+    if KnowledgeItem is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Knowledge item not found",
         )
 
     return KnowledgeItem

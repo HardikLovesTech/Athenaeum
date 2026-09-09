@@ -47,3 +47,40 @@ def GetKnowledgeItem(
     )
 
     return Database.scalar(Statement)
+
+
+
+def UpdateKnowledgeItem(
+    Database: Session,
+    UserId: int,
+    KnowledgeItemId: int,
+    Title: str | None,
+    Content: str | None,
+    Type: str | None,
+    SourceUrl: str | None,
+) -> KnowledgeItem | None:
+    KnowledgeItem = GetKnowledgeItem(
+        Database=Database,
+        UserId=UserId,
+        KnowledgeItemId=KnowledgeItemId,
+    )
+
+    if KnowledgeItem is None:
+        return None
+
+    if Title is not None:
+        KnowledgeItem.Title = Title
+
+    if Content is not None:
+        KnowledgeItem.Content = Content
+
+    if Type is not None:
+        KnowledgeItem.Type = Type
+
+    if SourceUrl is not None:
+        KnowledgeItem.SourceUrl = SourceUrl
+
+    Database.commit()
+    Database.refresh(KnowledgeItem)
+
+    return KnowledgeItem
