@@ -1,6 +1,7 @@
-from fastapi import APIRouter, Depends, status , HTTPException
+from fastapi import APIRouter, Depends, status , HTTPException, UploadFile , File
 from sqlalchemy.orm import Session
 
+from app.services.document_services import ExtractPdfText
 from app.core.security import GetCurrentUser
 from app.db.models.user import User
 from app.db.session import GetDatabase
@@ -131,3 +132,50 @@ def DeleteKnowledge(
             status_code=404,
             detail="Knowledge item not found",
         )
+
+
+
+@Router.post(
+    "/upload",
+    response_model=KnowledgeItemResponse,
+    status_code=status.HTTP_201_CREATED,
+)
+def UploadKnowledgeDocument(
+    File: UploadFile = File(...),
+    CurrentUser: User = Depends(GetCurrentUser),
+    Database: Session = Depends(GetDatabase),
+):
+    try:
+        ExtractedText = ExtractPdfText(File)
+    except ValueError as Error:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=str(Error),
+        ) from Error
+
+    if not ExtractedText:
+        raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Could not extract text from PDF",
+            )
+
+    KnowledgeItem = CreateKnowledgeItem(
+        Database=Database,
+        UserId=CurrentUser.Id,
+        Title=File.filename or "Uploaded Document",
+        Content=ExtractedText,
+        Type="pdf",
+        SourceUrl=None,
+    )
+
+    return KnowledgeItem
+
+
+
+
+
+
+
+
+
+    
