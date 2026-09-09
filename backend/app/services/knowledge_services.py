@@ -34,3 +34,16 @@ def GetKnowledgeItems(
     )
 
     return list(Database.scalars(Statement).all())
+
+
+def GetKnowledgeItem(
+    Database: Session,
+    UserId: int,
+    KnowledgeItemId: int,
+) -> KnowledgeItem | None:
+    Statement = select(KnowledgeItem).where(
+        KnowledgeItem.Id == KnowledgeItemId,
+        KnowledgeItem.UserId == UserId,
+    )
+
+    return Database.scalar(Statement)

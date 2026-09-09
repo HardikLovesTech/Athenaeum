@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, status , HTTPException
 from sqlalchemy.orm import Session
 
 from app.core.security import GetCurrentUser
@@ -12,6 +12,7 @@ from app.schemas.knowledge_item import (
 from app.services.knowledge_services import (
     CreateKnowledgeItem,
     GetKnowledgeItems,
+    GetKnowledgeItem
 )
 
 Router = APIRouter(
@@ -52,3 +53,29 @@ def GetKnowledge(
         Database=Database,
         UserId=CurrentUser.Id,
     )
+
+
+@Router.get(
+    "{KnowledgeItemId}",
+    response_model=KnowledgeItemResponse,
+)
+def GetKnowledgebyId(
+    KnowledgeItemId:int,
+    CurrentUser: User = Depends(GetCurrentUser),
+    Database: Session = Depends(GetDatabase)
+):
+    KnowledgeItem = GetKnowledgeItem(
+        Database=Database,
+        UserId=CurrentUser.Id,
+        KnowledgeItemId=KnowledgeItemId,
+    )
+
+    if KnowledgeItem is None:
+        from fastapi import HTTPException
+
+        raise HTTPException(
+            status_code=404,
+            detail="Knowledge item not found"
+        )
+
+    return KnowledgeItem
