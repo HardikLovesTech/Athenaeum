@@ -19,6 +19,10 @@ from app.services.knowledge_services import (
     DeleteKnowledgeItem
 )
 
+
+from app.services.chunk_services import CreateDocumentChunks
+
+
 Router = APIRouter(
     prefix="/knowledge",
     tags=["Knowledge"],
@@ -166,6 +170,12 @@ def UploadKnowledgeDocument(
         Content=ExtractedText,
         Type="pdf",
         SourceUrl=None,
+    )
+
+    CreateDocumentChunks(
+        Database=Database,
+        KnowledgeItemId=KnowledgeItem.Id,
+        Content=ExtractedText
     )
 
     return KnowledgeItem
