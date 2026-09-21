@@ -9,7 +9,7 @@ from app.api.v1.routes.redis import Router as RedisRouter
 from app.api.v1.routes.knowledge import Router as KnowledgeRouter
 from app.api.v1.routes.search import Router as SearchRouter
 from app.api.v1.routes.rag import Router as RAGRouter
-
+from app.api.v1.routes.summary import Router as SummaryRouter
 
 app = FastAPI(
     title="Athenaeum API",
@@ -58,5 +58,10 @@ app.include_router(
 
 app.include_router(
     RAGRouter,
+    prefix="/api/v1"
+)
+
+app.include_router(
+    SummaryRouter,
     prefix="/api/v1"
 )
