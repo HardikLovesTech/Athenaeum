@@ -2,44 +2,43 @@ from sqlalchemy.orm import Session
 
 from app.services.search_services import SearchDocumentChunks
 
+
 def BuildRAGContext(
-        Database: Session,
-        Query: str,
-        UserId : int,
-        KnowledgeItemId: int | None = None,
-        limit: int = 5
-) -> str:
-    """
-    Build a context for RAG (Retrieval-Augmented Generation) based on the provided query and optional knowledge item ID.
-
-    Args:
-        Database (Session): The SQLAlchemy database session.
-        Query (str): The query string for which to build the context.
-        UserId (int): The ID of the user making the request.
-        KnowledgeItemId (int | None, optional): An optional knowledge item ID to filter the search. Defaults to None.
-        limit (int, optional): The maximum number of document chunks to retrieve. Defaults to 5.
-
-    Returns:
-        str: A concatenated string of document chunks that serve as context for RAG.
-    """
-    # Retrieve relevant document chunks based on the query and optional knowledge item ID
+    Database: Session,
+    Query: str,
+    UserId: int,
+    KnowledgeItemId: int | None = None,
+    Limit: int = 5,
+) -> tuple[str, list]:
     Results = SearchDocumentChunks(
         Database=Database,
         Query=Query,
-        # UserId=UserId,
+        UserId=UserId,
         KnowledgeItemId=KnowledgeItemId,
-        Limit=limit
+        Limit=Limit,
     )
 
     if not Results:
-        return ""
+        return "", []
 
     ContextParts: list[str] = []
+    Sources: list = []
 
     for DocumentChunk, Distance in Results:
         ContextParts.append(
             f"[Source Chunk {DocumentChunk.ChunkIndex}]\n"
-            f"{DocumentChunk.Content}\n"
+            f"{DocumentChunk.Content}"
         )
 
-    return "\n\n".join(ContextParts)
+        Sources.append(
+            {
+                "KnowledgeItemId": DocumentChunk.KnowledgeItemId,
+                "ChunkIndex": DocumentChunk.ChunkIndex,
+                "Content": DocumentChunk.Content,
+                "Distance": Distance,
+            }
+        )
+
+    Context = "\n\n".join(ContextParts)
+
+    return Context, Sources

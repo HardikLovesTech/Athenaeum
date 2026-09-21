@@ -3,13 +3,15 @@ from sqlalchemy.orm import Session
 
 from app.db.models.document_chunk import DocumentChunk
 from app.services.embedding_services import GenerateEmbedding
+from app.db.models.knowledge_item import KnowledgeItem
 
 
 def SearchDocumentChunks(
-        Database: Session,
-        Query: str,
-        KnowledgeItemId: int | None = None,
-        Limit: int = 5,
+    Database: Session,
+    Query: str,
+    UserId: int,
+    KnowledgeItemId: int | None = None,
+    Limit: int = 5,
 ) -> list[tuple[DocumentChunk, float]]:
     QueryEmbedding = GenerateEmbedding(Query)
 
@@ -18,11 +20,18 @@ def SearchDocumentChunks(
     )
 
     Statement = (
-        select (
+        select(
             DocumentChunk,
             DistanceExpression.label("Distance"),
         )
-        .where(DocumentChunk.Embedding.is_not(None))
+        .join(
+            KnowledgeItem,
+            KnowledgeItem.Id == DocumentChunk.KnowledgeItemId,
+        )
+        .where(
+            KnowledgeItem.UserId == UserId,
+            DocumentChunk.Embedding.is_not(None),
+        )
         .order_by(DistanceExpression)
         .limit(Limit)
     )
@@ -34,8 +43,7 @@ def SearchDocumentChunks(
 
     Results = Database.execute(Statement).all()
 
-
     return [
-        (DocumentChunk , float(Distance))
+        (DocumentChunk, float(Distance))
         for DocumentChunk, Distance in Results
     ]
