@@ -2,6 +2,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.db.models.document_chunk import DocumentChunk
+from app.services.embedding_services import GenerateEmbedding
 
 
 def ChunkText(
@@ -49,10 +50,14 @@ def CreateDocumentChunks(
     DocumentChunks: list[DocumentChunk] = []
 
     for ChunkIndex, ChunkContent in enumerate(TextChunk):
+
+        Embedding = GenerateEmbedding(ChunkContent)
+
         DocumentChunkRecord = DocumentChunk(
             KnowledgeItemId = KnowledgeItemId,
             ChunkIndex=ChunkIndex,
-            Content=ChunkContent
+            Content=ChunkContent,
+            Embedding=Embedding,
         )
 
         Database.add(DocumentChunkRecord)

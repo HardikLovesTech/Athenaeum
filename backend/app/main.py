@@ -7,6 +7,9 @@ from app.api.v1.routes.auth import Router as AuthRouter
 from app.api.v1.routes.users import Router as UsersRouter
 from app.api.v1.routes.redis import Router as RedisRouter
 from app.api.v1.routes.knowledge import Router as KnowledgeRouter
+from app.api.v1.routes.search import Router as SearchRouter
+from app.api.v1.routes.rag import Router as RAGRouter
+
 
 app = FastAPI(
     title="Athenaeum API",
@@ -45,5 +48,15 @@ app.include_router(
 
 app.include_router(
     KnowledgeRouter,
+    prefix="/api/v1"
+)
+
+app.include_router(
+    SearchRouter,
+    prefix="/api/v1"
+)
+
+app.include_router(
+    RAGRouter,
     prefix="/api/v1"
 )
