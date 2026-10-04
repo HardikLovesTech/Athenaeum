@@ -1,0 +1,848 @@
+.App {
+  min-height: 100vh;
+  padding: 18px 48px 48px;
+}
+
+/* ==================== NAVBAR ==================== */
+
+.Navbar {
+  height: 72px;
+  border: 1.5px solid #171717;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  padding: 0 26px;
+  gap: 42px;
+}
+
+.Brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 290px;
+}
+
+.BrandName {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.7px;
+}
+
+.BrandTagline {
+  font-size: 12px;
+  color: #5d5d5d;
+  margin-top: 1px;
+}
+
+.Navigation {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.NavigationItem {
+  border: 0;
+  background: transparent;
+  padding: 11px 18px;
+  border-radius: 24px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.NavigationItem.Active {
+  background: #f4f09b;
+  border: 1px solid #171717;
+}
+
+.NavbarRight {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.SearchBar {
+  width: 250px;
+  height: 40px;
+  border: 1px solid #bdbab1;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 12px;
+  color: #77736a;
+  font-size: 13px;
+}
+
+.SearchBar kbd {
+  margin-left: auto;
+  font-size: 11px;
+  border: 1px solid #d4d1c9;
+  border-radius: 5px;
+  padding: 2px 5px;
+}
+
+.Profile {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 14px;
+}
+
+.ProfileAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #171717;
+  color: white;
+  display: grid;
+  place-items: center;
+}
+
+/* ==================== HERO ==================== */
+
+.Hero {
+  min-height: 325px;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 110px;
+  align-items: center;
+  gap: 40px;
+  padding: 40px 24px 20px;
+}
+
+.Eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 10px;
+  letter-spacing: 3px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.Eyebrow span {
+  width: 55px;
+  height: 1px;
+  background: #171717;
+}
+
+.Hero h1 {
+  font-size: clamp(52px, 5vw, 78px);
+  line-height: 0.96;
+  letter-spacing: -4px;
+  margin-bottom: 22px;
+}
+
+.Hero p {
+  font-size: 17px;
+  line-height: 1.45;
+  color: #55524c;
+}
+
+.HeroActions {
+  display: flex;
+  gap: 18px;
+  margin-top: 25px;
+}
+
+.PrimaryButton,
+.SecondaryButton {
+  height: 50px;
+  border-radius: 28px;
+  padding: 0 22px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.PrimaryButton {
+  background: #111111;
+  color: white;
+  border: 1px solid #111111;
+}
+
+.SecondaryButton {
+  background: transparent;
+  border: 1px solid #171717;
+}
+
+.HeroVisual {
+  height: 280px;
+  position: relative;
+}
+
+.HeroPaper {
+  position: absolute;
+  width: 275px;
+  height: 230px;
+  right: 110px;
+  top: 20px;
+  border: 1px solid #8e8b83;
+  border-radius: 16px;
+  transform: rotate(-5deg);
+  background: #f5f1e7;
+  padding: 32px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+.AccentCircles {
+  display: flex;
+  margin-top: auto;
+}
+
+.AccentCircles span {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #ff5420;
+}
+
+.AccentCircles span + span {
+  background: #f7d45e;
+  margin-left: -10px;
+}
+
+.HeroMountain {
+  position: absolute;
+  width: 310px;
+  height: 250px;
+  right: 20px;
+  top: 30px;
+  overflow: hidden;
+  border-radius: 15px;
+  background: #eeeae0;
+  transform: rotate(3deg);
+}
+
+.MountainShape {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  right: 20px;
+  bottom: -90px;
+  background: #252525;
+  clip-path: polygon(
+    0 100%,
+    30% 45%,
+    44% 65%,
+    63% 20%,
+    100% 100%
+  );
+}
+
+.HeroSideText {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 9px;
+  letter-spacing: 3px;
+  font-weight: 600;
+}
+
+.HeroDivider {
+  width: 55px;
+  height: 1px;
+  background: #222;
+  margin: 20px 0;
+}
+
+.HeroDots {
+  display: flex;
+  gap: 13px;
+  margin-top: 25px;
+}
+
+.HeroDots i {
+  width: 7px;
+  height: 7px;
+  border: 1px solid #333;
+  border-radius: 50%;
+}
+
+.HeroDots .ActiveDot {
+  background: #ff5420;
+  border-color: #ff5420;
+}
+
+/* ==================== WORKSPACE ==================== */
+
+.Workspace {
+  display: grid;
+  grid-template-columns: 265px minmax(400px, 1fr) minmax(450px, 1.05fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.StatsColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.StatCard {
+  min-height: 78px;
+  border: 1.5px solid #191919;
+  border-bottom: 0;
+  padding: 15px 20px;
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  grid-template-rows: 1fr 1fr;
+  column-gap: 12px;
+}
+
+.StatCard:first-child {
+  border-radius: 16px 16px 0 0;
+}
+
+.StatCard:nth-child(4) {
+  border-bottom: 1.5px solid #191919;
+  border-radius: 0 0 16px 16px;
+}
+
+.StatIcon {
+  grid-row: 1 / 3;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #f2f0e9;
+}
+
+.StatCard.Yellow .StatIcon {
+  background: #f4efa0;
+}
+
+.StatCard.Peach .StatIcon {
+  background: #ffd1bd;
+}
+
+.StatCard strong {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.StatCard > span {
+  font-size: 13px;
+  align-self: end;
+  color: #55524c;
+}
+
+.QuoteCard {
+  min-height: 245px;
+  margin-top: 16px;
+  border: 1.5px solid #191919;
+  border-radius: 16px;
+  padding: 25px;
+  position: relative;
+  overflow: hidden;
+  background: #f7f1e6;
+}
+
+.QuoteCard p {
+  font-family: Georgia, serif;
+  font-size: 22px;
+  font-style: italic;
+  line-height: 1.25;
+}
+
+.QuoteCard span {
+  display: block;
+  margin-top: 18px;
+  font-size: 13px;
+}
+
+.QuoteLine {
+  position: absolute;
+  bottom: 46px;
+  left: 25px;
+  width: 48px;
+  height: 1px;
+  background: #222;
+}
+
+.QuoteCircles {
+  position: absolute;
+  bottom: -15px;
+  right: 15px;
+  display: flex;
+}
+
+.QuoteCircles span {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: #ff5420;
+}
+
+.QuoteCircles span + span {
+  background: #f4d761;
+  margin-left: -12px;
+}
+
+/* ==================== DOCUMENTS ==================== */
+
+.DocumentsPanel,
+.AskPanel {
+  border: 1.5px solid #191919;
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.PanelHeader,
+.AskHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.PanelHeader h2,
+.AskHeader h2 {
+  font-size: 21px;
+  letter-spacing: -0.7px;
+}
+
+.SmallButton {
+  border: 1px solid #191919;
+  background: transparent;
+  border-radius: 22px;
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.DocumentFilters {
+  display: flex;
+  gap: 6px;
+  margin: 17px 0 12px;
+}
+
+.Filter {
+  border: 0;
+  padding: 8px 15px;
+  border-radius: 20px;
+  background: #f0eee8;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.Filter.Active {
+  background: #171717;
+  color: white;
+}
+
+.DocumentCard {
+  min-height: 78px;
+  border: 1px solid #dedbd3;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.PdfIcon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  background: #f13226;
+  color: white;
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.PdfIcon.Large {
+  width: 37px;
+  height: 42px;
+  border-radius: 5px;
+  font-size: 9px;
+}
+
+.DocumentInfo {
+  flex: 1;
+}
+
+.DocumentInfo h3 {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.DocumentInfo p {
+  color: #77736c;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.CategoryTag {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+}
+
+.YellowTag {
+  background: #f3efa0;
+}
+
+.PeachTag {
+  background: #ffd0bd;
+}
+
+.CreamTag {
+  background: #eee9dc;
+}
+
+.PurpleTag {
+  background: #e2d4ef;
+}
+
+.KnowledgeCard {
+  min-height: 155px;
+  margin-top: 14px;
+  padding: 22px;
+  border: 1.5px solid #191919;
+  border-radius: 16px;
+  background: #f7f1e6;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+}
+
+.KnowledgeEyebrow {
+  font-size: 8px;
+  letter-spacing: 3px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.KnowledgeEyebrow span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ff5420;
+}
+
+.KnowledgeCard h3 {
+  font-size: 26px;
+  line-height: 1;
+  margin: 13px 0 10px;
+  letter-spacing: -1px;
+}
+
+.KnowledgeCard p {
+  font-size: 12px;
+  color: #68645d;
+  line-height: 1.4;
+}
+
+.Globe {
+  font-size: 90px;
+  color: #d8d2c6;
+  align-self: center;
+}
+
+.RoundArrow {
+  position: absolute;
+  right: 20px;
+  bottom: 17px;
+  width: 35px;
+  height: 35px;
+  border: 0;
+  border-radius: 50%;
+  background: #171717;
+  color: white;
+  display: grid;
+  place-items: center;
+}
+
+/* ==================== ASK AI ==================== */
+
+.AskHeader {
+  margin-bottom: 17px;
+}
+
+.AskHeader h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.PoweredBy {
+  font-size: 7px;
+  letter-spacing: 2px;
+  text-align: right;
+  line-height: 1.7;
+}
+
+.DocumentSelector {
+  height: 47px;
+  border: 1px solid #bbb8af;
+  border-radius: 10px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.DocumentSelector span {
+  flex: 1;
+}
+
+.QuestionBox {
+  min-height: 78px;
+  border: 1px solid #bbb8af;
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 16px;
+  display: flex;
+  align-items: flex-end;
+  color: #55524c;
+  font-size: 14px;
+}
+
+.SendButton {
+  margin-left: auto;
+  width: 38px;
+  height: 32px;
+  border: 0;
+  border-radius: 9px;
+  background: #171717;
+  color: white;
+  display: grid;
+  place-items: center;
+}
+
+.PromptChips {
+  display: flex;
+  gap: 6px;
+  margin: 9px 0 13px;
+}
+
+.PromptChips button {
+  border: 1px solid #c7c3b9;
+  background: transparent;
+  border-radius: 20px;
+  padding: 7px 11px;
+  font-size: 10px;
+}
+
+.AnswerCard {
+  border: 1px solid #c7c3b9;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.AnswerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.AnswerHeader h3 {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 17px;
+}
+
+.AnswerHeader > span {
+  font-size: 11px;
+  color: #88837a;
+}
+
+.AiIcon {
+  width: 30px;
+  height: 30px;
+  border: 1.5px solid #171717;
+  border-radius: 7px;
+  display: grid;
+  place-items: center;
+  font-size: 9px;
+}
+
+.AnswerCard > p {
+  font-size: 13px;
+  line-height: 1.55;
+  color: #4f4c46;
+  margin: 12px 0 15px;
+}
+
+.Sources {
+  border-top: 1px solid #ddd9d0;
+  padding-top: 13px;
+}
+
+.SourcesHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.SourcesHeader span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.SourcesHeader button {
+  border: 0;
+  background: transparent;
+  color: #55524c;
+  font-size: 10px;
+}
+
+.SourceCard {
+  display: grid;
+  grid-template-columns: 32px 1fr 1.1fr;
+  gap: 9px;
+  align-items: center;
+  padding: 9px 0;
+  border-top: 1px solid #e4e1da;
+}
+
+.PdfIcon.Small {
+  width: 27px;
+  height: 32px;
+  font-size: 7px;
+}
+
+.SourceCard strong {
+  display: block;
+  font-size: 11px;
+}
+
+.SourceCard span {
+  display: block;
+  font-size: 9px;
+  color: #77736c;
+  margin-top: 3px;
+}
+
+.SourceCard p {
+  font-size: 9px;
+  color: #77736c;
+  line-height: 1.35;
+}
+
+/* ==================== RESPONSIVE ==================== */
+
+@media (max-width: 1200px) {
+  .App {
+    padding: 15px 25px 30px;
+  }
+
+  .Navbar {
+    gap: 20px;
+  }
+
+  .Brand {
+    min-width: auto;
+  }
+
+  .Workspace {
+    grid-template-columns: 220px 1fr;
+  }
+
+  .AskPanel {
+    grid-column: 1 / -1;
+  }
+
+  .Hero {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .HeroSideText {
+    display: none;
+  }
+}
+
+@media (max-width: 800px) {
+  .App {
+    padding: 12px;
+  }
+
+  .Navbar {
+    height: auto;
+    padding: 14px;
+    flex-wrap: wrap;
+  }
+
+  .Navigation {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .NavbarRight {
+    margin-left: auto;
+  }
+
+  .SearchBar {
+    display: none;
+  }
+
+  .Hero {
+    grid-template-columns: 1fr;
+    padding: 35px 10px;
+  }
+
+  .Hero h1 {
+    font-size: 48px;
+  }
+
+  .HeroVisual {
+    display: none;
+  }
+
+  .Workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .StatsColumn {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .QuoteCard {
+    grid-column: 1 / -1;
+  }
+
+  .StatCard {
+    border: 1px solid #191919;
+    border-radius: 0;
+  }
+
+  .StatCard:first-child {
+    border-radius: 14px 0 0 0;
+  }
+
+  .StatCard:nth-child(2) {
+    border-radius: 0 14px 0 0;
+  }
+
+  .StatCard:nth-child(3) {
+    border-radius: 0 0 0 14px;
+  }
+
+  .StatCard:nth-child(4) {
+    border-radius: 0 0 14px 0;
+  }
+}
