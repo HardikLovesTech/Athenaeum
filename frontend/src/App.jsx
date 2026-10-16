@@ -3,10 +3,15 @@ import {
   ChevronDown,
   Database,
   FileText,
+  LogIn,
   MessageSquare,
   Send,
   Sparkles,
 } from "lucide-react";
+
+import { use, useState } from "react";
+import Login from "./components/Login";
+import { GetAccessToken } from "./services/auth";
 
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -18,6 +23,19 @@ import AskPanel from "./components/AskPanel";
 import "./App.css";
 
 function App() {
+
+  const [IsAuthenticated, SetIsAuthenticated] = useState(
+    Boolean(GetAccessToken())
+  );
+
+  if (!IsAuthenticated) {
+    return (
+      <Login 
+        OnLogin={() => SetIsAuthenticated(true)}
+      />
+    );
+  }
+
   return (
     <div className="App">
       <Navbar />

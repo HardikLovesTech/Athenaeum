@@ -846,3 +846,114 @@
     border-radius: 0 0 14px 0;
   }
 }
+
+
+
+.LoginPage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: #f8f5ed;
+}
+
+.LoginCard {
+  width: 100%;
+  max-width: 460px;
+  padding: 48px;
+  background: #fffdf8;
+  border: 1px solid #171717;
+  border-radius: 24px;
+  box-shadow: 8px 8px 0 #171717;
+}
+
+.LoginBrand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 56px;
+}
+
+.LoginHeader {
+  margin-bottom: 32px;
+}
+
+.LoginEyebrow {
+  margin-bottom: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.LoginHeader h1 {
+  margin-bottom: 12px;
+  font-size: 38px;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.LoginHeader p {
+  color: #68655f;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.LoginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.LoginForm label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.LoginForm input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #c9c4b9;
+  border-radius: 10px;
+  background: #fffdf8;
+  color: #171717;
+  font: inherit;
+  outline: none;
+}
+
+.LoginForm input:focus {
+  border-color: #171717;
+}
+
+.LoginError {
+  padding: 12px 14px;
+  border: 1px solid #d26a3d;
+  border-radius: 8px;
+  background: #fff0e8;
+  color: #8d3515;
+  font-size: 13px;
+}
+
+.LoginButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 15px 18px;
+  border: 1px solid #171717;
+  border-radius: 10px;
+  background: #171717;
+  color: #fffdf8;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.LoginButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
